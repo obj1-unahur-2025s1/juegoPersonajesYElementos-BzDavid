@@ -2,7 +2,11 @@ import armasElementos.*
 
 //Jugadora
 object luisa {
-  var personajeActivo = floki
+  var personajeActivo = 'No tengo personaje activo'
+
+  method aparece(elemento){
+    personajeActivo.encontrar(elemento)
+  }
 
   method personajeActivo() = personajeActivo
 
@@ -13,31 +17,34 @@ object luisa {
 
 //Personajes
 object floki {
-  var clase = "Guerrero"
-
   var armaEquipada = ballesta
 
   method encontrar(elemento){
     if (armaEquipada.estaCargada()){
+      armaEquipada.utilizarArma()
       elemento.esAtacado()
     }
   }
 
-  method queClaseEs() = clase
+  method cambiarArma(nuevaArma) {
+    armaEquipada = nuevaArma
+  }
 
   method armaEquipada() = armaEquipada
-
 }
 
 object mario {
-  var clase = "Trabajador"
+  var valorRecolectado = 0
 
-  var esFeliz = true
+  var esFeliz = false
 
   method encontrar(elemento){
-    
+    valorRecolectado = valorRecolectado + elemento.valorAOtorgar()
+    esFeliz = valorRecolectado >= 50 or elemento.altura() > 10
   }
 
-  method queClaseEs() = clase
+  method esFeliz() = esFeliz
+
+  method valorRecolectado() = valorRecolectado
 }
 
